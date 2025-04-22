@@ -1,0 +1,68 @@
+.card {
+  margin-bottom: 16px;
+  border-radius: 4px;
+  overflow: visible;
+}
+
+.content {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.body {
+  margin-bottom: 32px;
+  white-space: pre-line;
+  line-height: 1.7;
+}
+
+.divider {
+  margin: 24px 0;
+}
+
+.authorContainer {
+  padding: 24px;
+  border-radius: 4px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.authorContent {
+  flex: 1;
+}
+
+.authorName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.authorEmail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loadingContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+} 

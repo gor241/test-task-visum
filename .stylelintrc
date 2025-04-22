@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss"
+  ],
+  "rules": {
+    "selector-class-pattern": null,
+    "no-descending-specificity": null,
+    "color-function-notation": "legacy",
+    "alpha-value-notation": "number",
+    "selector-not-notation": "simple",
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "media-feature-range-notation": "prefix",
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
+  }
+} 

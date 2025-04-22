@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  width: 100%;
+}
+
+.toolbar {
+  padding-left: 16px;
+  padding-right: 16px;
+  
+  @media (min-width: 600px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.title {
+  flex-grow: 1;
+}
+
+.main {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.content {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.footer {
+  width: 100%;
+  margin-top: auto;
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+
+.footerContainer {
+  padding: 16px;
+}
+
+.footerText {
+  text-align: center;
+} 

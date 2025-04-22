@@ -1,0 +1,40 @@
+.container {
+  margin-bottom: 32px;
+}
+
+.gridContainer {
+  margin-bottom: 32px;
+}
+
+.gridItem {
+  display: flex;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  flex: 0 0 33.333%;
+  max-width: 33.333%;
+  
+  @media (max-width: 960px) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  @media (max-width: 600px) {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.cardWrapper {
+  width: 100%;
+  display: flex;
+}
+
+.divider {
+  margin: 32px 0;
+}
+
+.paginationContainer {
+  padding: 16px;
+  border-radius: 4px;
+} 
