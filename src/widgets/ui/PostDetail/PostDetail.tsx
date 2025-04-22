@@ -1,15 +1,15 @@
-import React from 'react';
-import { 
-  Card, 
-  CardContent, 
-  Typography, 
+import { FC } from 'react';
+import {
+  Card,
+  CardContent,
+  Typography,
   Box,
-  Divider, 
+  Divider,
   Paper,
   Avatar,
   Chip,
   Skeleton,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import { useGetPostQuery, useGetUserQuery } from '@shared/api';
 import { LoadingState, ErrorState, EmptyState } from '@shared/ui';
@@ -22,10 +22,14 @@ interface PostDetailProps {
   postId: number;
 }
 
-export const PostDetail: React.FC<PostDetailProps> = ({ postId }) => {
+export const PostDetail: FC<PostDetailProps> = ({ postId }) => {
   const theme = useTheme();
   const { data: post, isLoading: isPostLoading, error: postError } = useGetPostQuery(postId);
-  const { data: user, isLoading: isUserLoading, error: userError } = useGetUserQuery(post?.userId || 0, {
+  const {
+    data: user,
+    isLoading: isUserLoading,
+    error: userError,
+  } = useGetUserQuery(post?.userId || 0, {
     skip: !post?.userId,
   });
 
@@ -42,38 +46,26 @@ export const PostDetail: React.FC<PostDetailProps> = ({ postId }) => {
   }
 
   return (
-    <Card 
-      elevation={3}
-      className={styles.card}
-    >
+    <Card elevation={3} className={styles.card}>
       <CardContent className={styles.content}>
         <Box className={styles.header}>
-          <Chip 
-            label={`ID: ${post.id}`} 
-            color="primary"
-            size="small"
-          />
+          <Chip label={`ID: ${post.id}`} color="primary" size="small" />
         </Box>
 
-        <Typography 
-          variant="h5" 
-          component="h1" 
-          gutterBottom 
-          className={styles.title}
-        >
+        <Typography variant="h5" component="h1" gutterBottom className={styles.title}>
           {post.title}
         </Typography>
-        
-        <Typography 
-          variant="body1" 
+
+        <Typography
+          variant="body1"
           className={styles.body}
           sx={{ color: theme.palette.text.primary }}
         >
           {post.body}
         </Typography>
-        
+
         <Divider className={styles.divider} />
-        
+
         {isUserLoading ? (
           <Box className={styles.loadingContainer}>
             <Skeleton variant="circular" width={40} height={40} />
@@ -83,21 +75,19 @@ export const PostDetail: React.FC<PostDetailProps> = ({ postId }) => {
             </Box>
           </Box>
         ) : user ? (
-          <Paper 
-            elevation={1} 
+          <Paper
+            elevation={1}
             className={styles.authorContainer}
-            sx={{ 
-              backgroundColor: theme.palette.mode === 'dark' 
-                ? theme.palette.background.default 
-                : theme.palette.grey[50],
+            sx={{
+              backgroundColor:
+                theme.palette.mode === 'dark'
+                  ? theme.palette.background.default
+                  : theme.palette.grey[50],
             }}
           >
             <Box className={styles.authorInfo}>
               <Box>
-                <Avatar 
-                  className={styles.avatar}
-                  sx={{ bgcolor: theme.palette.primary.main }}
-                >
+                <Avatar className={styles.avatar} sx={{ bgcolor: theme.palette.primary.main }}>
                   <AccountCircleIcon fontSize="large" />
                 </Avatar>
               </Box>
@@ -121,4 +111,4 @@ export const PostDetail: React.FC<PostDetailProps> = ({ postId }) => {
       </CardContent>
     </Card>
   );
-}; 
+};

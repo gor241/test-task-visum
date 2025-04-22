@@ -6,4 +6,4 @@ export * from './SearchBar';
 export * from './SortControls';
 export * from './FilterControls';
 export * from './PageTransition';
-export * from './Toast'; 
+export * from './Toast';

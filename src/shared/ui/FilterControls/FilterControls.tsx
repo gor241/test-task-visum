@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import {
   FormControl,
   InputLabel,
@@ -24,7 +24,7 @@ export interface FilterControlsProps {
   label?: string;
 }
 
-export const FilterControls: React.FC<FilterControlsProps> = ({
+export const FilterControls: FC<FilterControlsProps> = ({
   options,
   selectedValues,
   onFilterChange,
@@ -35,10 +35,7 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
       target: { value },
     } = event;
 
-    // В MUI передается строка, преобразуем ее обратно в массив
     const newValues = typeof value === 'string' ? value.split(',') : value;
-
-    // Преобразуем все значения в числа, если это возможно
     const processedValues = newValues.map((val) => {
       const numVal = Number(val);
       return !isNaN(numVal) ? numVal : val;

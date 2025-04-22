@@ -35,7 +35,7 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
   const isPostFavorite = isFavorite(post.id);
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault(); // Предотвращаем переход по ссылке при клике
+    e.preventDefault();
     toggleFavorite(post.id);
 
     if (!isPostFavorite) {

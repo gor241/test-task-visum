@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Snackbar, Alert, AlertColor } from '@mui/material';
 
 export interface ToastProps {
@@ -9,7 +9,7 @@ export interface ToastProps {
   onClose: () => void;
 }
 
-export const Toast: React.FC<ToastProps> = ({
+export const Toast: FC<ToastProps> = ({
   open,
   message,
   severity = 'success',

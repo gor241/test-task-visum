@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, Box } from '@mui/material';
 import styles from './SortControls.module.scss';
 
@@ -16,7 +16,7 @@ export interface SortControlsProps {
   sortDirection: SortDirection;
 }
 
-export const SortControls: React.FC<SortControlsProps> = ({
+export const SortControls: FC<SortControlsProps> = ({
   options,
   onSortChange,
   selectedOption,

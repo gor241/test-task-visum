@@ -1,14 +1,14 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { 
-  AppBar, 
-  Toolbar, 
-  Typography, 
-  Container, 
-  CssBaseline, 
-  Box, 
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  CssBaseline,
+  Box,
   IconButton,
-  useMediaQuery
+  useMediaQuery,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AnimatePresence } from 'framer-motion';
@@ -20,9 +20,9 @@ export const Layout: FC = () => {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const location = useLocation();
-  
+
   const toggleColorMode = () => {
-    setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
 
   const theme = useMemo(
@@ -42,7 +42,7 @@ export const Layout: FC = () => {
           },
         },
       }),
-    [mode],
+    [mode]
   );
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export const Layout: FC = () => {
             </IconButton>
           </Toolbar>
         </AppBar>
-        
+
         <Box component="main" className={styles.main}>
           <Container maxWidth="lg" className={styles.content}>
             <AnimatePresence mode="wait">
@@ -73,12 +73,13 @@ export const Layout: FC = () => {
             </AnimatePresence>
           </Container>
         </Box>
-        
-        <Box 
-          component="footer" 
+
+        <Box
+          component="footer"
           className={styles.footer}
-          sx={{ 
-            backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[900],
+          sx={{
+            backgroundColor:
+              theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[900],
             borderTopColor: theme.palette.divider,
           }}
         >
@@ -91,4 +92,4 @@ export const Layout: FC = () => {
       </Box>
     </ThemeProvider>
   );
-}; 
+};

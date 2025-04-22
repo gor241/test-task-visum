@@ -6,7 +6,6 @@ import {
   Button,
   Divider,
   Paper,
-  Box,
   useMediaQuery,
   useTheme,
 } from '@mui/material';

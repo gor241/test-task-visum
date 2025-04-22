@@ -6,16 +6,12 @@ interface EmptyStateProps {
   message?: string;
 }
 
-export const EmptyState: FC<EmptyStateProps> = ({ 
-  message = 'Нет данных'
-}) => {
+export const EmptyState: FC<EmptyStateProps> = ({ message = 'Нет данных' }) => {
   return (
     <Paper elevation={2} className={styles.container}>
       <Box className={styles.content}>
-        <Typography variant="h6">
-          {message}
-        </Typography>
+        <Typography variant="h6">{message}</Typography>
       </Box>
     </Paper>
   );
-}; 
+};

@@ -1,15 +1,5 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import {
-  Grid,
-  Box,
-  Paper,
-  Divider,
-  useTheme,
-  Typography,
-  FormControlLabel,
-  Switch,
-} from '@mui/material';
-import { PostCard } from '@entities/ui';
+import { useState, useMemo, useCallback, ChangeEvent } from 'react';
+import { Box, Paper, Divider, useTheme, Typography } from '@mui/material';
 import { useGetPostsQuery, useGetUsersQuery } from '@shared/api';
 import { usePagination, useFavorites } from '@shared/hooks';
 import {
@@ -17,105 +7,11 @@ import {
   ErrorState,
   EmptyState,
   PaginationControls,
-  SearchBar,
-  SortControls,
   SortDirection,
-  FilterControls,
 } from '@shared/ui';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import type { Post, User } from '@shared/model';
+import { PostFilters, PostGrid } from './components';
 import styles from './PostList.module.scss';
-
-// Вынесенные константы для чистоты кода
-const sortOptions = [
-  { value: 'id', label: 'ID' },
-  { value: 'title', label: 'Заголовок' },
-  { value: 'userId', label: 'Автор' },
-];
-
-// Типы для вынесенных компонентов
-interface PostFiltersProps {
-  searchTerm: string;
-  onSearch: (term: string) => void;
-  showOnlyFavorites: boolean;
-  onFavoritesToggle: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  authorOptions: Array<{ value: number; label: string }>;
-  selectedAuthors: number[];
-  onFilterChange: (selectedValues: (number | string)[]) => void;
-  sortField: string;
-  sortDirection: SortDirection;
-  onSortChange: (field: string, direction: SortDirection) => void;
-}
-
-interface PostGridProps {
-  posts: Post[];
-  currentPage: number;
-  itemsPerPage: number;
-}
-
-// Выносим компонент фильтрации для уменьшения размера основного компонента
-// и следования принципу единой ответственности
-const PostFilters: React.FC<PostFiltersProps> = ({
-  searchTerm,
-  onSearch,
-  showOnlyFavorites,
-  onFavoritesToggle,
-  authorOptions,
-  selectedAuthors,
-  onFilterChange,
-  sortField,
-  sortDirection,
-  onSortChange,
-}) => (
-  <Box className={styles.toolbarContainer}>
-    <Box className={styles.searchContainer}>
-      <SearchBar onSearch={onSearch} placeholder="Поиск по заголовку или содержанию..." />
-      <FormControlLabel
-        control={
-          <Switch
-            checked={showOnlyFavorites}
-            onChange={onFavoritesToggle}
-            color="error"
-            icon={<FavoriteIcon />}
-          />
-        }
-        label="Только избранное"
-        className={styles.favoritesToggle}
-      />
-    </Box>
-    <Box className={styles.filtersContainer}>
-      <Box className={styles.filterItem}>
-        <FilterControls
-          options={authorOptions}
-          selectedValues={selectedAuthors}
-          onFilterChange={onFilterChange}
-          label="Авторы"
-        />
-      </Box>
-      <Box className={styles.filterItem}>
-        <SortControls
-          options={sortOptions}
-          onSortChange={onSortChange}
-          selectedOption={sortField}
-          sortDirection={sortDirection}
-        />
-      </Box>
-    </Box>
-  </Box>
-);
-
-// Выносим компонент грида постов
-const PostGrid: React.FC<PostGridProps> = ({ posts, currentPage, itemsPerPage }) => (
-  <Grid container className={styles.gridContainer} key={`page-${currentPage}-${itemsPerPage}`}>
-    {posts.map((post) => (
-      <div key={post.id} className={styles.gridItem}>
-        <Box className={styles.cardWrapper}>
-          <PostCard post={post} />
-        </Box>
-      </div>
-    ))}
-  </Grid>
-);
 
 export const PostList = () => {
   const { data: posts, isLoading: isPostsLoading, error: postsError } = useGetPostsQuery();
@@ -137,7 +33,7 @@ export const PostList = () => {
     }));
   }, [users]);
 
-  // Мемоизированная функция фильтрации постов
+  // функция фильтрации постов
   const getFilteredPosts = useCallback(
     (allPosts: Post[] | undefined) => {
       if (!allPosts) return [];
@@ -204,7 +100,6 @@ export const PostList = () => {
     return sortedPosts.slice(startIndex, startIndex + itemsPerPage);
   }, [sortedPosts, currentPage, itemsPerPage]);
 
-  // Обработчики событий с использованием useCallback
   const handleSearch = useCallback((term: string) => {
     setSearchTerm(term);
     // Сброс страницы при изменении поискового запроса делается внутри хука usePagination
@@ -219,7 +114,7 @@ export const PostList = () => {
     setSelectedAuthors(selectedValues as number[]);
   }, []);
 
-  const handleFavoritesToggle = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFavoritesToggle = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setShowOnlyFavorites(event.target.checked);
   }, []);
 
@@ -239,7 +134,6 @@ export const PostList = () => {
     return <EmptyState message="Посты не найдены" />;
   }
 
-  // Сообщение при отсутствии результатов фильтрации
   const emptyFilterMessage = showOnlyFavorites
     ? 'У вас пока нет избранных постов'
     : 'Ничего не найдено по указанным критериям';

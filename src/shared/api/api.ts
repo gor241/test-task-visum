@@ -20,4 +20,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetPostsQuery, useGetPostQuery, useGetUserQuery, useGetUsersQuery } = api; 
+export const { useGetPostsQuery, useGetPostQuery, useGetUserQuery, useGetUsersQuery } = api;

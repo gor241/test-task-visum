@@ -1,10 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { SelectChangeEvent } from '@mui/material';
-import {
-  ITEMS_PER_PAGE_OPTIONS,
-  DEFAULT_PAGE,
-  DEFAULT_ITEMS_PER_PAGE,
-} from '@shared/constants/pagination';
+import { DEFAULT_PAGE, DEFAULT_ITEMS_PER_PAGE } from '@shared/constants/pagination';
 
 export interface PaginationOptions {
   defaultPage?: number;
@@ -18,7 +14,7 @@ export interface PaginationResult<T> {
   itemsPerPage: number;
   totalPages: number;
   paginatedItems: T[];
-  handlePageChange: (event: React.ChangeEvent<unknown> | undefined, value: number) => void;
+  handlePageChange: (event: ChangeEvent<unknown> | undefined, value: number) => void;
   handleItemsPerPageChange: (event: SelectChangeEvent) => void;
 }
 
@@ -29,7 +25,6 @@ export function usePagination<T>(
   const {
     defaultPage = DEFAULT_PAGE,
     defaultItemsPerPage = DEFAULT_ITEMS_PER_PAGE,
-    itemsPerPageOptions = ITEMS_PER_PAGE_OPTIONS,
     totalItems,
   } = options;
 
@@ -40,11 +35,8 @@ export function usePagination<T>(
     ? Math.ceil(items.length / itemsPerPage)
     : Math.ceil(totalItems / itemsPerPage);
 
-  // Объединяем логику проверки границ страницы в один эффект
   useEffect(() => {
-    // Не используем page в условии, чтобы избежать бесконечного цикла
     if (totalPages > 0) {
-      // Если текущая страница выходит за пределы общего числа страниц
       if (page > totalPages) {
         setPage(totalPages);
       }
@@ -52,9 +44,9 @@ export function usePagination<T>(
       // Если нет страниц, сбрасываем на первую
       setPage(1);
     }
-  }, [totalPages]); // Убираем page из зависимостей
+  }, [totalPages, page]);
 
-  const handlePageChange = (event: React.ChangeEvent<unknown> | undefined, value: number) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown> | undefined, value: number) => {
     setPage(value);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   flex: 1;
   border-radius: 4px;
 
@@ -33,7 +35,7 @@
 
 .favoriteButton {
   transition: transform 0.2s;
-  
+
   &:hover {
     transform: scale(1.15);
   }
@@ -81,4 +83,4 @@
 .button {
   text-transform: none;
   border-radius: 20px;
-} 
+}

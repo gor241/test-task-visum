@@ -7,4 +7,4 @@ export const LoadingState = () => {
       <CircularProgress size={60} />
     </Box>
   );
-}; 
+};

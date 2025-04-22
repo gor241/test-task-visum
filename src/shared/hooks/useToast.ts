@@ -7,17 +7,18 @@ interface ToastState {
   severity: AlertColor;
 }
 
-type ToastType = 'success' | 'error' | 'info' | 'warning';
+export interface ToastAPI {
+  toast: ToastState;
+  autoHideDuration: number;
+  showToast: (message: string, severity?: AlertColor, duration?: number) => void;
+  hideToast: () => void;
+  showSuccess: (message: string, duration?: number) => void;
+  showError: (message: string, duration?: number) => void;
+  showInfo: (message: string, duration?: number) => void;
+  showWarning: (message: string, duration?: number) => void;
+}
 
-// Объект для маппинга типов уведомлений к соответствующим severity
-const TOAST_TYPE_MAP: Record<ToastType, AlertColor> = {
-  success: 'success',
-  error: 'error',
-  info: 'info',
-  warning: 'warning',
-};
-
-export function useToast(defaultDuration = 3000) {
+export function useToast(defaultDuration = 3000): ToastAPI {
   const [toast, setToast] = useState<ToastState>({
     open: false,
     message: '',
@@ -48,17 +49,25 @@ export function useToast(defaultDuration = 3000) {
     }));
   }, []);
 
-  // Создаем объект с методами для разных типов уведомлений
-  const toastMethods = Object.keys(TOAST_TYPE_MAP).reduce(
-    (acc, type) => {
-      const toastType = type as ToastType;
-      acc[`show${toastType.charAt(0).toUpperCase() + toastType.slice(1)}`] = (
-        message: string,
-        duration?: number
-      ) => showToast(message, TOAST_TYPE_MAP[toastType], duration);
-      return acc;
-    },
-    {} as Record<string, (message: string, duration?: number) => void>
+  // Создаем методы для разных типов уведомлений
+  const showSuccess = useCallback(
+    (message: string, duration?: number) => showToast(message, 'success', duration),
+    [showToast]
+  );
+
+  const showError = useCallback(
+    (message: string, duration?: number) => showToast(message, 'error', duration),
+    [showToast]
+  );
+
+  const showInfo = useCallback(
+    (message: string, duration?: number) => showToast(message, 'info', duration),
+    [showToast]
+  );
+
+  const showWarning = useCallback(
+    (message: string, duration?: number) => showToast(message, 'warning', duration),
+    [showToast]
   );
 
   return {
@@ -66,6 +75,9 @@ export function useToast(defaultDuration = 3000) {
     autoHideDuration,
     showToast,
     hideToast,
-    ...toastMethods,
+    showSuccess,
+    showError,
+    showInfo,
+    showWarning,
   };
 }

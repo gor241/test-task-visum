@@ -9,7 +9,7 @@ import {
   MenuItem,
   SelectChangeEvent,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import { ITEMS_PER_PAGE_OPTIONS } from '@shared/constants';
 import styles from './PaginationControls.module.scss';
@@ -29,24 +29,21 @@ export const PaginationControls: FC<PaginationControlsProps> = ({
   itemsPerPage,
   itemsPerPageOptions = ITEMS_PER_PAGE_OPTIONS,
   onPageChange,
-  onItemsPerPageChange
+  onItemsPerPageChange,
 }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  
+
   return (
-    <Stack 
-      spacing={2} 
-      justifyContent="center" 
-      alignItems="center" 
+    <Stack
+      spacing={2}
+      justifyContent="center"
+      alignItems="center"
       direction={isSmallScreen ? 'column' : 'row'}
       className={styles.container}
     >
       <Box className={styles.controlsGroup}>
-        <Typography 
-          variant="body2" 
-          sx={{ color: theme.palette.text.secondary }}
-        >
+        <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
           Показывать по:
         </Typography>
         <FormControl size="small" variant="outlined" sx={{ minWidth: 90 }}>
@@ -65,23 +62,20 @@ export const PaginationControls: FC<PaginationControlsProps> = ({
           </Select>
         </FormControl>
       </Box>
-      
-      <Pagination 
-        count={totalPages} 
-        page={currentPage} 
-        onChange={onPageChange} 
+
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={onPageChange}
         color="primary"
-        size={isSmallScreen ? "small" : "medium"}
-        showFirstButton 
+        size={isSmallScreen ? 'small' : 'medium'}
+        showFirstButton
         showLastButton
       />
-      
-      <Typography 
-        variant="body2" 
-        sx={{ color: theme.palette.text.secondary }}
-      >
+
+      <Typography variant="body2" sx={{ color: theme.palette.text.secondary }}>
         Страница {currentPage} из {totalPages}
       </Typography>
     </Stack>
   );
-}; 
+};

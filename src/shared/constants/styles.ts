@@ -24,4 +24,4 @@ export const BODY_ELLIPSIS = {
   ...TEXT_ELLIPSIS,
   WebkitLineClamp: 3,
   height: '72px',
-}; 
+};
