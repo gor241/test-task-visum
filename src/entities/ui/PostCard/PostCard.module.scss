@@ -31,6 +31,14 @@
   width: 100%;
 }
 
+.favoriteButton {
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
 .title {
   display: -webkit-box;
   overflow: hidden;
@@ -53,6 +61,14 @@
   flex-grow: 1;
   height: 72px;
   width: 100%;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: 8px;
 }
 
 .actions {

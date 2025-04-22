@@ -1,1 +1,3 @@
-export * from './usePagination'; 
+export * from './usePagination';
+export * from './useFavorites';
+export * from './useToast';

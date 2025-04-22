@@ -14,7 +14,10 @@ export const api = createApi({
     getUser: builder.query<User, number>({
       query: (id) => `/users/${id}`,
     }),
+    getUsers: builder.query<User[], void>({
+      query: () => '/users',
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useGetPostQuery, useGetUserQuery } = api; 
+export const { useGetPostsQuery, useGetPostQuery, useGetUserQuery, useGetUsersQuery } = api; 

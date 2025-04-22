@@ -1,5 +1,5 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { 
   AppBar, 
   Toolbar, 
@@ -11,6 +11,7 @@ import {
   useMediaQuery
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { AnimatePresence } from 'framer-motion';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import styles from './Layout.module.scss';
@@ -18,6 +19,7 @@ import styles from './Layout.module.scss';
 export const Layout: FC = () => {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const location = useLocation();
   
   const toggleColorMode = () => {
     setMode(prevMode => prevMode === 'light' ? 'dark' : 'light');
@@ -66,7 +68,9 @@ export const Layout: FC = () => {
         
         <Box component="main" className={styles.main}>
           <Container maxWidth="lg" className={styles.content}>
-            <Outlet />
+            <AnimatePresence mode="wait">
+              <Outlet key={location.pathname} />
+            </AnimatePresence>
           </Container>
         </Box>
         

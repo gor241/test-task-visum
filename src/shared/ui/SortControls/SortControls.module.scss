@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+.formControl {
+  min-width: 180px;
+  
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+} 

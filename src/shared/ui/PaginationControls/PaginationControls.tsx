@@ -19,7 +19,7 @@ interface PaginationControlsProps {
   totalPages: number;
   itemsPerPage: number;
   itemsPerPageOptions?: number[];
-  onPageChange: (event: ChangeEvent<unknown>, page: number) => void;
+  onPageChange: (event: ChangeEvent<unknown> | undefined, page: number) => void;
   onItemsPerPageChange: (event: SelectChangeEvent) => void;
 }
 

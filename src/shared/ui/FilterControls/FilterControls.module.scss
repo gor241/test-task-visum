@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.formControl {
+  min-width: 200px;
+  
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+} 
